@@ -1,9 +1,13 @@
 // Author, David Lutch
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+
 public class Game {
     private boolean gameOver;
     private int pointValue;
     private GameViewer window;
+    private ArrayList<String> words;
     // private ArrayList<Words> Words;
 
 //    public boolean isGameOver() {
