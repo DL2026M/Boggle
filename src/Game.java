@@ -3,24 +3,25 @@
 public class Game {
     private boolean gameOver;
     private int pointValue;
-    private ArrayList<Words> Words;
+    private GameViewer window;
+    // private ArrayList<Words> Words;
 
-    public boolean isGameOver() {
+//    public boolean isGameOver() {
+//
+//    }
+//    public int pointValueWord() {
+//
+//    }
+//    public boolean isValidWord() {
+//
+//    }
 
-    }
-    public int pointValueWord() {
 
-    }
-    public boolean isValidWord() {
-
-    }
     public static void main(String[] args) {
-
+        Game newGame = new Game();
     }
 
-    public Game(boolean gameOver, int pointValue, ArrayList<Words> words) {
-        this.gameOver = gameOver;
-        this.pointValue = pointValue;
-        Words = words;
+    public Game() {
+        this.window = new GameViewer(this);
     }
 }
