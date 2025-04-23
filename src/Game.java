@@ -8,17 +8,9 @@ public class Game {
     private int pointValue;
     private GameViewer window;
     private ArrayList<String> words;
-    // private ArrayList<Words> Words;
 
-//    public boolean isGameOver() {
-//
-//    }
-//    public int pointValueWord() {
-//
-//    }
-//    public boolean isValidWord() {
-//
-//    }
+
+
 
 
     public static void main(String[] args) {
