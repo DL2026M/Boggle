@@ -7,10 +7,10 @@ public class GameViewer extends JFrame {
     private Image board;
     private GameLetterManager letterManager;
 
-    private int WINDOW_WIDTH = 1000;
+    private int WINDOW_WIDTH = 930;
     private int WINDOW_HEIGHT = 1000;
-    private int STARTING_XCORD = 100;
-    private int STARTING_YCORD = 100;
+    private int STARTING_XCORD = 0;
+    private int STARTING_YCORD = 25;
     private int STARTING_BOARD_XCORD = 750;
     private int STARTING_BOARD_YCORD = 750;
     private int TOTAL_LETTERS = 26;
@@ -30,11 +30,13 @@ public class GameViewer extends JFrame {
     }
     public void paint(Graphics g) {
         g.setColor(Color.black);
-        g.drawImage(board, STARTING_XCORD, STARTING_YCORD, STARTING_BOARD_XCORD, STARTING_BOARD_YCORD,this);
+        g.drawImage(board, STARTING_XCORD, STARTING_YCORD, WINDOW_WIDTH, WINDOW_HEIGHT,this);
+        // get a counter
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                g.drawImage(letterManager.getShuffledLetters().get(i).getImage(), 105 * i, 125 * j, 125,125,this);
+                g.drawImage(letterManager.getShuffledLetters().get(i).getImage(), 245 + (j*88),  170 + (i*87), 88,87,this);
             }
+
         }
     }
 }
