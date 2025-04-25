@@ -31,12 +31,12 @@ public class GameViewer extends JFrame {
     public void paint(Graphics g) {
         g.setColor(Color.black);
         g.drawImage(board, STARTING_XCORD, STARTING_YCORD, WINDOW_WIDTH, WINDOW_HEIGHT,this);
-        // get a counter
+        int counter = 0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                g.drawImage(letterManager.getShuffledLetters().get(i).getImage(), 245 + (j*88),  170 + (i*87), 88,87,this);
+                g.drawImage(letterManager.getShuffledLetters().get(counter).getImage(), 245 + (j*88),  170 + (i*87), 88,87,this);
+                counter++;
             }
-
         }
     }
 }
