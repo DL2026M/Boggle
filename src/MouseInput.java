@@ -20,6 +20,7 @@ public class MouseInput implements MouseListener, MouseMotionListener, ActionLis
     public void mouseClicked(MouseEvent e) {
         // width = 88
         // height = 87;
+        // Getting the x and y cords of wherever the user clicked
         int x = e.getX();
         int y = e.getY();
         int xVariable;
@@ -31,7 +32,7 @@ public class MouseInput implements MouseListener, MouseMotionListener, ActionLis
                     yVariable = (y - (j * 87) + BOARD_STARTING_YCORD);
                     if (0 > yVariable && yVariable < 87) {
                         // make sure that the letters know what they are (like what letter)
-                        letterManager.setCurrentWord(letterManager.getShuffledLetters().get((i + 1)* j);
+                        letterManager.setCurrentWord(letterManager.getShuffledLetters().get((i + 1)* j));
                     }
                 }
             }
