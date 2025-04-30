@@ -25,7 +25,7 @@ public class GameViewer extends JFrame {
         this.board = new ImageIcon("Resources/BoggleBoard.png").getImage();
         this.introPage = new ImageIcon("Resources/BoggleBoardIntro.png").getImage();
         this.outroPage = new ImageIcon("Resources/BoggleBoardOutro.png").getImage();
-        this.letterManager = new GameLetterManager();
+        this.letterManager = new GameLetterManager(this);
 
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

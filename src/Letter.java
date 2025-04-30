@@ -8,8 +8,14 @@ public class Letter {
    private String name;
 
     // Getters & setter methods
-   public Letter(Image image) {
+   public Letter(Image image, char name) {
        this.image = image;
+       if (name != 'q') {
+           this.name = name + "";
+       }
+       else {
+           this.name = "qu";
+       }
    }
    public Image getImage() {
         return image;
