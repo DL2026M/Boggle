@@ -9,6 +9,7 @@ public class GameLetterManager {
     private final int LETTERS_PER_BOARD = 25;
     private GameViewer viewer;
     private MouseInput input;
+    private final int asciiStarting = 97;
 
 
     public GameLetterManager(GameViewer viewer) {
@@ -18,7 +19,7 @@ public class GameLetterManager {
         input = new MouseInput(this);
         for (int i = 0; i < GameViewer.TOTAL_LETTERS; i++) {
             Image letterImage = new ImageIcon("Resources/Letters/letter" + i + ".png").getImage();
-            Letter filler = new Letter(letterImage, (char) (i + 97));
+            Letter filler = new Letter(letterImage, (char) (i + asciiStarting));
             letters.add(filler);
 
         }
@@ -30,10 +31,6 @@ public class GameLetterManager {
             shuffledLetters.add(letters.get(randomNumber));
         }
         updateLetterLocations();
-    }
-
-    public ArrayList<Letter> getShuffledLetters() {
-        return shuffledLetters;
     }
 
     public void updateLetterLocations() {
@@ -62,6 +59,9 @@ public class GameLetterManager {
 
     public GameViewer getViewer() {
         return viewer;
+    }
+    public ArrayList<Letter> getShuffledLetters() {
+        return shuffledLetters;
     }
 }
 

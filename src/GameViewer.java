@@ -18,6 +18,9 @@ public class GameViewer extends JFrame {
     public static final int TOTAL_LETTERS = 26;
     public static final int LETTERS_PER_COL = 5;
     public static final int LETTERS_PER_ROW = 5;
+    public static final int STARTING_LETTER_XCORD = 245;
+    public static final int STARTING_LETTER_YCORD = 170;
+    public static final int LETTER_DISTANCE_X = 88;
 
 
     public GameViewer(Game game) {

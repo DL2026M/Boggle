@@ -25,23 +25,37 @@ public class MouseInput implements MouseListener, MouseMotionListener, ActionLis
         // Getting the x and y cords of wherever the user clicked
         int x = e.getX();
         int y = e.getY();
-        int xVariable;
-        int yVariable;
-        int counter = 0;
-        for (int i = 0; i < 5; i++) {
-            xVariable =  x- ((i * 88) + BOARD_STARTING_XCORD);
-                for (int j = 0; j < 5; j++) {
-                    if (0 < xVariable && xVariable < 88) {
-                        yVariable = y -((j * 87) + BOARD_STARTING_YCORD);
-                        if (0 < yVariable && yVariable < 87) {
-                            // make sure that the letters know what they are (like what letter)
-                            letterManager.addStringToCurrentWord(letterManager.getShuffledLetters().get(counter).getName());
-                            System.out.println(letterManager.getShuffledLetters().get(counter).getName());
-                    }
-                }
-                    counter++;
+        int xVariable = 0;
+        int yVariable = 0;
+       // int counter = 0;
+        int counter;
+
+
+        if (245 < x && x < 685) {
+            if (170 < y && y < 605) {
+                xVariable = ((x - BOARD_STARTING_XCORD) / 88);
+                yVariable = ((((y - BOARD_STARTING_YCORD) / 87)));
+                yVariable = yVariable * 5;
+                counter = xVariable + yVariable;
+                letterManager.addStringToCurrentWord(letterManager.getShuffledLetters().get(counter).getName());
+                System.out.println(letterManager.getShuffledLetters().get(counter).getName());
             }
         }
+
+//        for (int i = 0; i < 5; i++) {
+//            xVariable =  x - ((i * 88) + BOARD_STARTING_XCORD);
+//                for (int j = 0; j < 5; j++) {
+//                    if (0 < xVariable && xVariable < 88) {
+//                        yVariable = y - ((j * 87) + BOARD_STARTING_YCORD);
+//                        if (0 < yVariable && yVariable < 87) {
+//                            // make sure that the letters know what they are (like what letter)
+//                            letterManager.addStringToCurrentWord(letterManager.getShuffledLetters().get(counter).getName());
+//                            System.out.println(letterManager.getShuffledLetters().get(counter).getName());
+//                    }
+//                }
+//                    counter++;
+//            }
+//        }
     }
 
     @Override
