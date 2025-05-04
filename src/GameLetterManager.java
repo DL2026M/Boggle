@@ -10,7 +10,7 @@ public class GameLetterManager {
     private GameViewer viewer;
     private MouseInput input;
     private final int asciiStarting = 97;
-
+    private Letter previousLetter;
 
     public GameLetterManager(GameViewer viewer) {
         letters = new ArrayList<Letter>();
@@ -35,14 +35,37 @@ public class GameLetterManager {
 
     public void updateLetterLocations() {
         int counter = 0;
+        Letter currentLetter;
         for (int i = 0; i < GameViewer.LETTERS_PER_ROW; i++) {
             for (int j = 0; j < GameViewer.LETTERS_PER_COL; j++) {
-                shuffledLetters.get(counter).setX(245 + (j * 88));
-                shuffledLetters.get(counter).setY(170 + (i * 87));
+                currentLetter = shuffledLetters.get(counter);
+                currentLetter.setX(245 + (j * 88));
+                currentLetter.setGridX(j);
+                currentLetter.setY(170 + (i * 87));
+                currentLetter.setGridY(i);
                 counter++;
             }
         }
     }
+    public boolean isValidMove(Letter move) {
+        if (previousLetter == null) {
+            return true;
+        }
+        if (Math.abs(previousLetter.getGridX() - move.getGridX()) <= 1) {
+            if (Math.abs(previousLetter.getGridY() - move.getGridY()) <= 1) {
+                if (!move.getIsVisted()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public void move(Letter move) {
+        previousLetter = move;
+        previousLetter.setVisted(true);
+    }
+
+
     public void addStringToCurrentWord(String letter) {
         currentWord += letter;
     }

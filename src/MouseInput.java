@@ -37,25 +37,14 @@ public class MouseInput implements MouseListener, MouseMotionListener, ActionLis
                 yVariable = ((((y - BOARD_STARTING_YCORD) / 87)));
                 yVariable = yVariable * 5;
                 counter = xVariable + yVariable;
-                letterManager.addStringToCurrentWord(letterManager.getShuffledLetters().get(counter).getName());
-                System.out.println(letterManager.getShuffledLetters().get(counter).getName());
+                Letter variable = letterManager.getShuffledLetters().get(counter);
+                if (letterManager.isValidMove(variable)) {
+                    letterManager.addStringToCurrentWord(variable.getName());
+                    System.out.println(variable.getName());
+                    letterManager.move(variable);
+                }
             }
         }
-
-//        for (int i = 0; i < 5; i++) {
-//            xVariable =  x - ((i * 88) + BOARD_STARTING_XCORD);
-//                for (int j = 0; j < 5; j++) {
-//                    if (0 < xVariable && xVariable < 88) {
-//                        yVariable = y - ((j * 87) + BOARD_STARTING_YCORD);
-//                        if (0 < yVariable && yVariable < 87) {
-//                            // make sure that the letters know what they are (like what letter)
-//                            letterManager.addStringToCurrentWord(letterManager.getShuffledLetters().get(counter).getName());
-//                            System.out.println(letterManager.getShuffledLetters().get(counter).getName());
-//                    }
-//                }
-//                    counter++;
-//            }
-//        }
     }
 
     @Override

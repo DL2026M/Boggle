@@ -5,7 +5,10 @@ public class Letter {
    private Image image;
    private int x;
    private int y;
+   private int gridX;
+   private int gridY;
    private String name;
+   private boolean isVisted;
 
     // Getters & setter methods
    public Letter(Image image, char name) {
@@ -45,5 +48,29 @@ public class Letter {
    public void setName(String name) {
         this.name = name;
    }
+
+    public void setGridX(int gridX) {
+        this.gridX = gridX;
+    }
+
+    public void setGridY(int gridY) {
+        this.gridY = gridY;
+    }
+
+    public int getGridX() {
+        return gridX;
+    }
+
+    public int getGridY() {
+        return gridY;
+    }
+
+    public boolean getIsVisted() {
+        return isVisted;
+    }
+
+    public void setVisted(boolean visted) {
+        isVisted = visted;
+    }
 }
 

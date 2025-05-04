@@ -42,6 +42,7 @@ public class GameViewer extends JFrame {
         int counter = 0;
         for (int i = 0; i < LETTERS_PER_ROW; i++) {
             for (int j = 0; j < LETTERS_PER_COL; j++) {
+                // make 2D array if time permits
                 g.drawImage(letterManager.getShuffledLetters().get(counter).getImage(), 245 + (j*88),  170 + (i*87), 88,87,this);
                 counter++;
             }
