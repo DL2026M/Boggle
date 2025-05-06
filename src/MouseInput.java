@@ -6,6 +6,12 @@ public class MouseInput implements MouseListener, MouseMotionListener, ActionLis
     private final int BOARD_STARTING_XCORD = 245;
     private final int BOARD_STARTING_YCORD = 170;
 
+    // enter here cord range: x(0, 205)
+    // y(518, 555)
+    // end cord range x(750, 930)
+    // y(900, 1000)
+    // play cord range on intro page x(500, 930)
+    // y(~850,100)
 
 
     public MouseInput(GameLetterManager letterManager) {
@@ -40,7 +46,7 @@ public class MouseInput implements MouseListener, MouseMotionListener, ActionLis
                 Letter variable = letterManager.getShuffledLetters().get(counter);
                 if (letterManager.isValidMove(variable)) {
                     letterManager.addStringToCurrentWord(variable.getName());
-                    System.out.println(variable.getName());
+                    System.out.println(letterManager.getCurrentWord());
                     letterManager.move(variable);
                 }
             }

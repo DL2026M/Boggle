@@ -19,6 +19,7 @@ public class Letter {
        else {
            this.name = "qu";
        }
+       isVisted = false;
    }
    public Image getImage() {
         return image;

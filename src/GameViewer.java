@@ -37,6 +37,8 @@ public class GameViewer extends JFrame {
         this.setVisible(true);
     }
     public void paint(Graphics g) {
+        g.setColor(Color.white);
+        g.drawRect(0,0,930,1000);
         g.setColor(Color.black);
         g.drawImage(board, STARTING_XCORD, STARTING_YCORD, WINDOW_WIDTH, WINDOW_HEIGHT,this);
         int counter = 0;
@@ -47,6 +49,13 @@ public class GameViewer extends JFrame {
                 counter++;
             }
         }
+        g.setColor(Color.black);
+        g.setFont(new Font("Serif", Font.PLAIN, 40));
+        g.drawString(letterManager.getCurrentWord(), 650, 750);
+    }
+
+    public GameLetterManager getLetterManager() {
+        return letterManager;
     }
 }
 
