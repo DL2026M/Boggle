@@ -18,23 +18,33 @@ public class GameLetterManager {
     public final String[] DICTIONARY = new String[DICTIONARY_SIZE];
 
 
+
+
     public GameLetterManager(GameViewer viewer) {
         letters = new ArrayList<Letter>();
         shuffledLetters = new ArrayList<Letter>();
         this.viewer = viewer;
         input = new MouseInput(this);
         for (int i = 0; i < GameViewer.TOTAL_LETTERS; i++) {
-            Image letterImage = new ImageIcon("Resources/Letters/letter" + i + ".png").getImage();
-            Letter filler = new Letter(letterImage, (char) (i + asciiStarting));
+            Letter filler = new Letter((char) (i + asciiStarting));
             letters.add(filler);
         }
         shuffle();
         loadDictionary();
     }
     private void shuffle() {
+        shuffledLetters.clear();
+        ArrayList<Integer> doubleChecker = new ArrayList<Integer>();
         for (int i = 0; i < LETTERS_PER_BOARD; i++) {
-            int randomNumber = ((int) (Math.random() * GameViewer.TOTAL_LETTERS));
-            shuffledLetters.add(letters.get(randomNumber));
+            int randomNumber = (int) (Math.random() * GameViewer.TOTAL_LETTERS);
+            if (!doubleChecker.contains(randomNumber)) {
+                doubleChecker.add(randomNumber);
+                shuffledLetters.add(letters.get(randomNumber));
+            }
+            else {
+                shuffledLetters.add(new Letter((char) letters.get(randomNumber).getAsciiValue()));
+            }
+
         }
         updateLetterLocations();
     }

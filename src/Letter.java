@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 
 public class Letter {
@@ -9,10 +10,13 @@ public class Letter {
    private int gridY;
    private String name;
    private boolean isVisted;
+   private int asciiValue;
+   //        this.image = image;
+    // put it in the letter constructor and it hass to findf its own image given what letters it given
 
     // Getters & setter methods
-   public Letter(Image image, char name) {
-       this.image = image;
+   public Letter(char name) {
+       this.asciiValue = (int)(name);
        if (name != 'q') {
            this.name = name + "";
        }
@@ -20,6 +24,8 @@ public class Letter {
            this.name = "qu";
        }
        isVisted = false;
+       int i = name - 'a';
+       image = new ImageIcon("Resources/Letters/letter" + i + ".png").getImage();
    }
    public Image getImage() {
         return image;
@@ -72,6 +78,14 @@ public class Letter {
 
     public void setVisted(boolean visted) {
         isVisted = visted;
+    }
+
+    public int getAsciiValue() {
+        return asciiValue;
+    }
+
+    public void setAsciiValue(int asciiValue) {
+        this.asciiValue = asciiValue;
     }
 }
 
