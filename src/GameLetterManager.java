@@ -14,6 +14,8 @@ public class GameLetterManager {
     private MouseInput input;
     private final int asciiStarting = 97;
     private Letter previousLetter;
+    private ArrayList<String> foundWords = new ArrayList<String>();
+    private int scoreTracker = 0;
     public final int DICTIONARY_SIZE = 143091;
     public final String[] DICTIONARY = new String[DICTIONARY_SIZE];
 
@@ -81,17 +83,24 @@ public class GameLetterManager {
         previousLetter = move;
         previousLetter.setVisted(true);
     }
-    // used from SpellingBee
+    // used from SpellingBee (checkword, loadDictionary, and found)
     public boolean checkWord() {
         int startIndex = 0;
         int endIndex = DICTIONARY_SIZE - 1;
         if (currentWord == "" || currentWord == null) {
             return false;
         }
-        return found(currentWord, startIndex, endIndex);
-
-
+        if (found(currentWord, startIndex, endIndex)) {
+            if (!foundWords.contains(currentWord)) {
+                addFoundWord(currentWord);
+                setScoreTracker(currentWord);
+                resetWord();
+                return true;
+            }
+        }
+        return false;
     }
+
     public void loadDictionary() {
         Scanner s;
         File dictionaryFile = new File("Resources/dictionary.txt");
@@ -171,6 +180,22 @@ public class GameLetterManager {
 
     public void setPreviousLetter(Letter previousLetter) {
         this.previousLetter = previousLetter;
+    }
+
+    public int getScoreTracker() {
+        return scoreTracker;
+    }
+
+    public void setScoreTracker(String word) {
+        this.scoreTracker += word.length() - 3;
+    }
+
+    public ArrayList<String> getFoundWords() {
+        return foundWords;
+    }
+
+    public void addFoundWord(String word) {
+        foundWords.add(word);
     }
 }
 

@@ -51,7 +51,19 @@ public class GameViewer extends JFrame {
         }
         g.setColor(Color.black);
         g.setFont(new Font("Serif", Font.PLAIN, 40));
-        g.drawString(letterManager.getCurrentWord(), 650, 750);
+        g.drawString(letterManager.getCurrentWord(), 230, 650);
+        g.drawString(String.valueOf(letterManager.getScoreTracker()), 860, 170);
+        printFoundWords(g);
+    }
+    // create a function that is a for loop that is called from outside of paint
+    private void printFoundWords(Graphics g) {
+        int size = letterManager.getFoundWords().size();
+        ArrayList<String> list = letterManager.getFoundWords();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < size; j++) {
+                g.drawString(list.get(i), 190, 800);
+            }
+        }
     }
 
     public GameLetterManager getLetterManager() {

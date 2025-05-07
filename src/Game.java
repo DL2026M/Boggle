@@ -23,10 +23,9 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         this.window = new GameViewer(this);
         this.letterManager = window.getLetterManager();
         letterManager.getViewer().addMouseListener(this);
+
     }
 
-        // enter here cord range: x(0, 205)
-        // y(518, 555)
         // end cord range x(750, 930)
         // y(900, 1000)
         // play cord range on intro page x(500, 930)
@@ -68,10 +67,6 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                         System.out.println(letterManager.getCurrentWord());
                         letterManager.move(variable);
                     }
-                   // else {
-                   //     letterManager.setCurrentWord("");
-                   //     letterManager.setPreviousLetter(null);
-                    //}
                 }
             }
             window.repaint();
