@@ -9,19 +9,17 @@ public class GameLetterManager {
     private ArrayList<Letter> letters;
     private ArrayList<Letter> shuffledLetters;
     private String currentWord = "";
-    private final int LETTERS_PER_BOARD = 25;
     private GameViewer viewer;
     private MouseInput input;
-    private final int asciiStarting = 97;
     private Letter previousLetter;
     private ArrayList<String> foundWords = new ArrayList<String>();
     private int scoreTracker = 0;
     private int gameState = 0;
+    // Constants
+    private final int asciiStarting = 97;
+    private final int LETTERS_PER_BOARD = 25;
     public final int DICTIONARY_SIZE = 143091;
     public final String[] DICTIONARY = new String[DICTIONARY_SIZE];
-
-
-
 
     public GameLetterManager(GameViewer viewer) {
         letters = new ArrayList<Letter>();
@@ -55,13 +53,12 @@ public class GameLetterManager {
     public void updateLetterLocations() {
         int counter = 0;
         Letter currentLetter;
-        //  GameViewer.LETTERS_PER_COL
-        for (int j = 0; j < 5; j++) {
-            for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < viewer.LETTERS_PER_ROW; j++) {
+            for (int i = 0; i < viewer.LETTERS_PER_COL; i++) {
                 currentLetter = shuffledLetters.get(counter);
-                currentLetter.setX(245 + (i * 88));
+                currentLetter.setX(viewer.STARTING_LETTER_XCORD + (i * viewer.LETTER_DISTANCE_X));
                 currentLetter.setGridX(i);
-                currentLetter.setY(170 + (j * 87));
+                currentLetter.setY(viewer.STARTING_LETTER_YCORD + (j * viewer.LETTER_DISTANCE_Y));
                 currentLetter.setGridY(j);
                 counter++;
             }
@@ -148,16 +145,10 @@ public class GameLetterManager {
     }
 
 
-
-
-
-
-
-
+    // Getters & setter methods
     public void addStringToCurrentWord(String letter) {
         currentWord += letter;
     }
-    // Getters & setter methods
     public void setCurrentWord(String currentWord) {
         this.currentWord = currentWord;
     }
@@ -192,7 +183,6 @@ public class GameLetterManager {
             this.scoreTracker += word.length() -3;
         }
     }
-
     public ArrayList<String> getFoundWords() {
         return foundWords;
     }

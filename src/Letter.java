@@ -11,10 +11,8 @@ public class Letter {
    private String name;
    private boolean isVisted;
    private int asciiValue;
-   //        this.image = image;
-    // put it in the letter constructor and it hass to findf its own image given what letters it given
 
-    // Getters & setter methods
+
    public Letter(char name) {
        this.asciiValue = (int)(name);
        if (name != 'q') {
@@ -27,6 +25,7 @@ public class Letter {
        int i = name - 'a';
        image = new ImageIcon("Resources/Letters/letter" + i + ".png").getImage();
    }
+   // Getters & setter methods
    public Image getImage() {
         return image;
    }

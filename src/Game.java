@@ -11,8 +11,16 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     private int pointValue;
     private GameViewer window;
     private GameLetterManager letterManager;
-    private final int BOARD_STARTING_XCORD = 245;
-    private final int BOARD_STARTING_YCORD = 170;
+    // Constants
+    private final int PLAY_XCORD = 450;
+    private final int PLAY_YCORD = 800;
+    private final int END_XCORD = 800;
+    private final int END_YCORD = 900;
+    private final int ENTER_XCORD = 205;
+    private final int ENTER_YCORD_LEAST = 518;
+    private final int ENTER_YCORD_MAX = 555;
+    private final int LETTER_YCORD_MAX = 605;
+    private final int LETTER_XCORD_MAX = 685;
 
 
     public static void main(String[] args) {
@@ -25,41 +33,31 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         letterManager.getViewer().addMouseListener(this);
 
     }
-
-        // end cord range x(750, 930)
-        // y(900, 1000)
-        // play cord range on intro page x(500, 930)
-        // y(~850,100)
-
-
         @Override
         public void actionPerformed(ActionEvent e) {
 
         }
-        // using
         @Override
         public void mouseClicked(MouseEvent e) {
-            // width = 88
-            // height = 87;
             // Getting the x and y cords of wherever the user clicked
             int x = e.getX();
             int y = e.getY();
-            int xVariable = 0;
-            int yVariable = 0;
-            int counter = 0;
-            if (0 < x && x < 205) {
-                if (518 < y && y < 555) {
+            int xVariable;
+            int yVariable;
+            int counter;
+            // Entering word button
+            if (window.STARTING_XCORD < x && x < ENTER_XCORD) {
+                if (ENTER_YCORD_LEAST < y && y < ENTER_YCORD_MAX) {
                     if (!letterManager.checkWord()) {
                         letterManager.resetWord();
                     }
                 }
             }
-
-            if (245 < x && x < 685) {
-                if (170 < y && y < 605) {
-                    xVariable = (x - BOARD_STARTING_XCORD) / 88;
-                    yVariable = (y - BOARD_STARTING_YCORD) / 87;
-                    yVariable = yVariable * 5;
+            if (window.STARTING_LETTER_XCORD < x && x < LETTER_XCORD_MAX) {
+                if (window.STARTING_LETTER_YCORD < y && y < LETTER_YCORD_MAX) {
+                    xVariable = (x - window.STARTING_LETTER_XCORD) / window.LETTER_DISTANCE_X;
+                    yVariable = (y - window.STARTING_LETTER_YCORD) / window.LETTER_DISTANCE_Y;
+                    yVariable = yVariable * window.LETTERS_PER_COL;
                     counter = xVariable + yVariable;
                     Letter variable = letterManager.getShuffledLetters().get(counter);
                     if (letterManager.isValidMove(variable)) {
@@ -68,18 +66,18 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     }
                 }
             }
-            if (0 < x && x < 450) {
-                if (800 < y && y < 1000) {
+            // Clicked on the play button on the intro page
+            if (window.STARTING_XCORD < x && x < PLAY_XCORD) {
+                if (PLAY_YCORD < y && y < window.WINDOW_HEIGHT) {
                     letterManager.setGameState(1);
                 }
             }
-            if (800 < x && x < 930) {
-                if (900 < y && y < 1000) {
+            // Clicked on the end button
+            if (END_XCORD < x && x < window.WINDOW_WIDTH) {
+                if (END_YCORD < y && y < window.WINDOW_HEIGHT) {
                     letterManager.setGameState(2);
                 }
             }
-
-
             window.repaint();
         }
 
@@ -112,6 +110,4 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         public void mouseMoved(MouseEvent e) {
 
         }
-
-
 }
