@@ -28,6 +28,10 @@ public class GameViewer extends JFrame {
     public final int TRACKER_Y = 170;
     public final int OUTRO_X = 130;
     public final int OUTRO_Y = 730;
+    private final int X_RANGE = 900;
+    private final int WORD_GAP = 40;
+    private final int SPACING = 30;
+    private final int NEW_LINE_JUMP = 50;
 
 
     public GameViewer(Game game) {
@@ -83,15 +87,18 @@ public class GameViewer extends JFrame {
         int size = letterManager.getFoundWords().size();
         ArrayList<String> list = letterManager.getFoundWords();
         int previous = 0;
-        //for (int i = 0; i < 3; i++) {
+        int currentX = 150;
+        int currentY = 800;
+        int counter = 0;
+
             for (int j = 0; j < size; j++) {
-                //if (j > 20) {
-                previous = 190 + (list.get(j).length() * 30);
-                    g.drawString(list.get(j), previous + 40, 800);
-               // }
-               // else {
-                   // g.drawString(list.get(j), 190 + (j * 5), 800 + (i * 80));
-                //}
+                if (currentX >= X_RANGE) {
+                    currentX = 0;
+                    currentY = 850 + (counter * NEW_LINE_JUMP);
+                    counter++;
+                }
+                g.drawString(list.get(j), currentX + WORD_GAP, currentY);
+                currentX = currentX + (list.get(j).length() * SPACING);
             }
         }
     public GameLetterManager getLetterManager() {
