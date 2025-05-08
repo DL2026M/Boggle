@@ -16,6 +16,7 @@ public class GameLetterManager {
     private Letter previousLetter;
     private ArrayList<String> foundWords = new ArrayList<String>();
     private int scoreTracker = 0;
+    private int gameState = 0;
     public final int DICTIONARY_SIZE = 143091;
     public final String[] DICTIONARY = new String[DICTIONARY_SIZE];
 
@@ -187,7 +188,9 @@ public class GameLetterManager {
     }
 
     public void setScoreTracker(String word) {
-        this.scoreTracker += word.length() - 3;
+        if (word.length() >= 4) {
+            this.scoreTracker += word.length() -3;
+        }
     }
 
     public ArrayList<String> getFoundWords() {
@@ -196,6 +199,14 @@ public class GameLetterManager {
 
     public void addFoundWord(String word) {
         foundWords.add(word);
+    }
+
+    public int getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
     }
 }
 

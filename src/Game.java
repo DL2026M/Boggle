@@ -64,11 +64,22 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     Letter variable = letterManager.getShuffledLetters().get(counter);
                     if (letterManager.isValidMove(variable)) {
                         letterManager.addStringToCurrentWord(variable.getName());
-                        System.out.println(letterManager.getCurrentWord());
                         letterManager.move(variable);
                     }
                 }
             }
+            if (0 < x && x < 450) {
+                if (800 < y && y < 1000) {
+                    letterManager.setGameState(1);
+                }
+            }
+            if (800 < x && x < 930) {
+                if (900 < y && y < 1000) {
+                    letterManager.setGameState(2);
+                }
+            }
+
+
             window.repaint();
         }
 

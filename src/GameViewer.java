@@ -38,33 +38,61 @@ public class GameViewer extends JFrame {
     }
     public void paint(Graphics g) {
         g.setColor(Color.white);
-        g.drawRect(0,0,930,1000);
-        g.setColor(Color.black);
-        g.drawImage(board, STARTING_XCORD, STARTING_YCORD, WINDOW_WIDTH, WINDOW_HEIGHT,this);
-        int counter = 0;
-        for (int i = 0; i < LETTERS_PER_ROW; i++) {
-            for (int j = 0; j < LETTERS_PER_COL; j++) {
-                // make 2D array if time permits
-                g.drawImage(letterManager.getShuffledLetters().get(counter).getImage(), 245 + (j*88),  170 + (i*87), 88,87,this);
-                counter++;
-            }
+        switch (letterManager.getGameState()) {
+            case 0:
+                g.drawImage(introPage, 0,0,930,1000, this);
+                break;
+            case 1:
+                g.drawRect(0,0,930,1000);
+                g.setColor(Color.black);
+                g.drawImage(board, STARTING_XCORD, STARTING_YCORD, WINDOW_WIDTH, WINDOW_HEIGHT,this);
+                int counter = 0;
+                for (int i = 0; i < LETTERS_PER_ROW; i++) {
+                    for (int j = 0; j < LETTERS_PER_COL; j++) {
+                        // make 2D array if time permits
+                        g.drawImage(letterManager.getShuffledLetters().get(counter).getImage(), 245 + (j*88),  170 + (i*87), 88,87,this);
+                        counter++;
+                    }
+                }
+                g.setColor(Color.black);
+                g.setFont(new Font("Serif", Font.PLAIN, 40));
+                g.drawString(letterManager.getCurrentWord(), 230, 650);
+                g.drawString(String.valueOf(letterManager.getScoreTracker()), 860, 170);
+                printFoundWords(g);
+                break;
+            case 2:
+                g.setFont(new Font("Serif", Font.PLAIN, 50));
+                g.setColor(Color.green);
+                g.drawImage(outroPage, 0,0,930,1000, this);
+                g.drawString(String.valueOf(letterManager.getScoreTracker()), 130, 730);
+                break;
+
         }
-        g.setColor(Color.black);
-        g.setFont(new Font("Serif", Font.PLAIN, 40));
-        g.drawString(letterManager.getCurrentWord(), 230, 650);
-        g.drawString(String.valueOf(letterManager.getScoreTracker()), 860, 170);
-        printFoundWords(g);
+
+
+
+
+
     }
+
+
     // create a function that is a for loop that is called from outside of paint
     private void printFoundWords(Graphics g) {
         int size = letterManager.getFoundWords().size();
         ArrayList<String> list = letterManager.getFoundWords();
-        for (int i = 0; i < 3; i++) {
+        int previous = 0;
+        //for (int i = 0; i < 3; i++) {
             for (int j = 0; j < size; j++) {
-                g.drawString(list.get(i), 190, 800);
+                //if (j > 20) {
+                previous = 190 + (list.get(j).length() * 30);
+                    g.drawString(list.get(j), previous + 40, 800);
+               // }
+               // else {
+                   // g.drawString(list.get(j), 190 + (j * 5), 800 + (i * 80));
+                //}
             }
         }
-    }
+
 
     public GameLetterManager getLetterManager() {
         return letterManager;
