@@ -45,7 +45,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             int xVariable;
             int yVariable;
             int counter;
-            // Entering word button
+            // Entering word button coordinates
             if (window.STARTING_XCORD < x && x < ENTER_XCORD) {
                 if (ENTER_YCORD_LEAST < y && y < ENTER_YCORD_MAX) {
                     if (!letterManager.checkWord()) {
@@ -53,6 +53,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     }
                 }
             }
+            // Checking to see if a letter on the board was clicked
             if (window.STARTING_LETTER_XCORD < x && x < LETTER_XCORD_MAX) {
                 if (window.STARTING_LETTER_YCORD < y && y < LETTER_YCORD_MAX) {
                     xVariable = (x - window.STARTING_LETTER_XCORD) / window.LETTER_DISTANCE_X;
@@ -60,6 +61,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     yVariable = yVariable * window.LETTERS_PER_COL;
                     counter = xVariable + yVariable;
                     Letter variable = letterManager.getShuffledLetters().get(counter);
+                    // Checking to see if the letter selected by the user is a valid move
                     if (letterManager.isValidMove(variable)) {
                         letterManager.addStringToCurrentWord(variable.getName());
                         letterManager.move(variable);
@@ -72,7 +74,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     letterManager.setGameState(1);
                 }
             }
-            // Clicked on the end button
+            // Clicked on the end button in the game stage of the board
             if (END_XCORD < x && x < window.WINDOW_WIDTH) {
                 if (END_YCORD < y && y < window.WINDOW_HEIGHT) {
                     letterManager.setGameState(2);

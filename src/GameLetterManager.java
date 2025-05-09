@@ -10,7 +10,6 @@ public class GameLetterManager {
     private ArrayList<Letter> shuffledLetters;
     private String currentWord = "";
     private GameViewer viewer;
-    private MouseInput input;
     private Letter previousLetter;
     private ArrayList<String> foundWords = new ArrayList<String>();
     private int scoreTracker = 0;
@@ -18,14 +17,15 @@ public class GameLetterManager {
     // Constants
     private final int asciiStarting = 97;
     private final int LETTERS_PER_BOARD = 25;
-    public final int DICTIONARY_SIZE = 143091;
-    public final String[] DICTIONARY = new String[DICTIONARY_SIZE];
+    private final int DICTIONARY_SIZE = 143091;
+    private final int MINIMUM_LENGTH = 4;
+    private final String[] DICTIONARY = new String[DICTIONARY_SIZE];
 
     public GameLetterManager(GameViewer viewer) {
         letters = new ArrayList<Letter>();
         shuffledLetters = new ArrayList<Letter>();
         this.viewer = viewer;
-        input = new MouseInput(this);
+        // Creates all the letters and assigns it a value based on the ascii value
         for (int i = 0; i < GameViewer.TOTAL_LETTERS; i++) {
             Letter filler = new Letter((char) (i + asciiStarting));
             letters.add(filler);
@@ -33,19 +33,21 @@ public class GameLetterManager {
         shuffle();
         loadDictionary();
     }
+    // here #12
     private void shuffle() {
         shuffledLetters.clear();
         ArrayList<Integer> doubleChecker = new ArrayList<Integer>();
         for (int i = 0; i < LETTERS_PER_BOARD; i++) {
             int randomNumber = (int) (Math.random() * GameViewer.TOTAL_LETTERS);
+            // Checks to see if the random value already exists in doubleChecker
             if (!doubleChecker.contains(randomNumber)) {
                 doubleChecker.add(randomNumber);
                 shuffledLetters.add(letters.get(randomNumber));
             }
+            // Creates a new letter object randomly
             else {
                 shuffledLetters.add(new Letter((char) letters.get(randomNumber).getAsciiValue()));
             }
-
         }
         updateLetterLocations();
     }
@@ -55,6 +57,7 @@ public class GameLetterManager {
         Letter currentLetter;
         for (int j = 0; j < viewer.LETTERS_PER_ROW; j++) {
             for (int i = 0; i < viewer.LETTERS_PER_COL; i++) {
+                // Updates each letter to know their x and y coordinates and placement on the grid
                 currentLetter = shuffledLetters.get(counter);
                 currentLetter.setX(viewer.STARTING_LETTER_XCORD + (i * viewer.LETTER_DISTANCE_X));
                 currentLetter.setGridX(i);
@@ -68,6 +71,7 @@ public class GameLetterManager {
         if (previousLetter == null) {
             return true;
         }
+        // Checks to see if the letter clicked on by the user is a valid(horizonal, diagonal, or vertical)
         if (Math.abs(previousLetter.getGridX() - move.getGridX()) <= 1) {
             if (Math.abs(previousLetter.getGridY() - move.getGridY()) <= 1) {
                 if (!move.getIsVisted()) {
@@ -81,7 +85,7 @@ public class GameLetterManager {
         previousLetter = move;
         previousLetter.setVisted(true);
     }
-    // used from SpellingBee (checkword, loadDictionary, and found)
+    // #8 here
     public boolean checkWord() {
         int startIndex = 0;
         int endIndex = DICTIONARY_SIZE - 1;
@@ -98,7 +102,7 @@ public class GameLetterManager {
         }
         return false;
     }
-
+    // Used from SpellingBee (checkword() (a small part of it), loadDictionary, and found)
     public void loadDictionary() {
         Scanner s;
         File dictionaryFile = new File("Resources/dictionary.txt");
@@ -113,6 +117,7 @@ public class GameLetterManager {
         }
     }
     // Recursively calls itself to see if each word created is a valid word by using binary search
+    // here #11
     private boolean found(String targetWord, int startIndex, int endIndex) {
         if (targetWord == null) {
             return false;
@@ -136,9 +141,10 @@ public class GameLetterManager {
         }
         return true;
     }
+    // Sets every letter to not visited and resets the previous and current word
     public void resetWord() {
-        for (int i = 0; i < shuffledLetters.size(); i++) {
-            shuffledLetters.get(i).setVisted(false);
+        for (Letter shuffledLetter : shuffledLetters) {
+            shuffledLetter.setVisted(false);
         }
         previousLetter = null;
         currentWord = "";
@@ -179,8 +185,8 @@ public class GameLetterManager {
     }
 
     public void setScoreTracker(String word) {
-        if (word.length() >= 4) {
-            this.scoreTracker += word.length() -3;
+        if (word.length() >= MINIMUM_LENGTH) {
+            this.scoreTracker += word.length() - (MINIMUM_LENGTH - 1);
         }
     }
     public ArrayList<String> getFoundWords() {

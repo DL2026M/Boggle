@@ -26,6 +26,7 @@ public class Letter {
        image = new ImageIcon("Resources/Letters/letter" + i + ".png").getImage();
    }
    // Getters & setter methods
+    // #7 here
    public Image getImage() {
         return image;
    }
@@ -81,10 +82,6 @@ public class Letter {
 
     public int getAsciiValue() {
         return asciiValue;
-    }
-
-    public void setAsciiValue(int asciiValue) {
-        this.asciiValue = asciiValue;
     }
 }
 

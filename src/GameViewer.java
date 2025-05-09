@@ -15,6 +15,7 @@ public class GameViewer extends JFrame {
     private final int STARTING_YCORD = 0;
     private final int STARTING_BOARD_YCORD = 25;
     private static final int FONT_SIZE = 40;
+    // #6 here
     public static final int TOTAL_LETTERS = 26;
     public final int LETTERS_PER_COL = 5;
     public final int LETTERS_PER_ROW = 5;
@@ -41,7 +42,6 @@ public class GameViewer extends JFrame {
         this.outroPage = new ImageIcon("Resources/BoggleBoardOutro.png").getImage();
         this.letterManager = new GameLetterManager(this);
 
-
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Boggle");
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -50,14 +50,17 @@ public class GameViewer extends JFrame {
     public void paint(Graphics g) {
         g.setColor(Color.white);
         switch (letterManager.getGameState()) {
+            // The intro page of the game
             case 0:
                 g.drawImage(introPage, STARTING_XCORD,STARTING_YCORD,WINDOW_WIDTH,WINDOW_HEIGHT, this);
                 break;
+            // The game page with the board and all the letters
             case 1:
                 g.drawRect(STARTING_XCORD,STARTING_YCORD,WINDOW_WIDTH,WINDOW_HEIGHT);
                 g.setColor(Color.black);
                 g.drawImage(board, STARTING_XCORD, STARTING_BOARD_YCORD, WINDOW_WIDTH, WINDOW_HEIGHT,this);
                 int counter = 0;
+                // Fills in the board with the shuffled letters that are evenly spaced between each other
                 for (int i = 0; i < LETTERS_PER_ROW; i++) {
                     for (int j = 0; j < LETTERS_PER_COL; j++) {
                         g.drawImage(letterManager.getShuffledLetters().get(counter).getImage(), STARTING_LETTER_XCORD
@@ -68,10 +71,12 @@ public class GameViewer extends JFrame {
                 }
                 g.setColor(Color.black);
                 g.setFont(new Font("Serif", Font.PLAIN, FONT_SIZE));
+                // Prints out the current word on the board and their score
                 g.drawString(letterManager.getCurrentWord(), WORD_X, WORD_Y);
                 g.drawString(String.valueOf(letterManager.getScoreTracker()), TRACKER_X, TRACKER_Y);
                 printFoundWords(g);
                 break;
+            // Draws the outro page with the amount of points that the player earned
             case 2:
                 g.setFont(new Font("Serif", Font.PLAIN, FONT_SIZE + 10));
                 g.setColor(Color.green);
@@ -81,8 +86,7 @@ public class GameViewer extends JFrame {
 
         }
     }
-
-    // create a function that is a for loop that is called from outside of paint
+    // A helper function to print out all the words in the foundWords ArrayList
     private void printFoundWords(Graphics g) {
         int size = letterManager.getFoundWords().size();
         ArrayList<String> list = letterManager.getFoundWords();
@@ -94,9 +98,11 @@ public class GameViewer extends JFrame {
             for (int j = 0; j < size; j++) {
                 if (currentX >= X_RANGE) {
                     currentX = 0;
+                    // Once the word prints out near the edge of the screen, go to a new line
                     currentY = 850 + (counter * NEW_LINE_JUMP);
                     counter++;
                 }
+                // Prints the words out with even spacing between them
                 g.drawString(list.get(j), currentX + WORD_GAP, currentY);
                 currentX = currentX + (list.get(j).length() * SPACING);
             }
