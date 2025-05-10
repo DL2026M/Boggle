@@ -15,7 +15,12 @@ public class GameViewer extends JFrame {
     private final int STARTING_YCORD = 0;
     private final int STARTING_BOARD_YCORD = 25;
     private static final int FONT_SIZE = 40;
-    // #6 here
+    /** #6: Understands how the keyword static affects methods and variables.
+     * The keyword static affects methods by allowing them to be called from other classes without that class making an
+     * object of the class that has the specific static method. In addition, static methods are able to call other
+     * static methods in that same class and also access any static instance variables. The word static in front of a
+     * (data type) variable leads to there only being one copy of that specific variable.
+     */
     public static final int TOTAL_LETTERS = 26;
     public final int LETTERS_PER_COL = 5;
     public final int LETTERS_PER_ROW = 5;
@@ -86,6 +91,24 @@ public class GameViewer extends JFrame {
 
         }
     }
+
+    /** #4: Can use if, while, and for.
+     * I use many if statements throughout my program, but a specific example of it is in the printFoundWords() method.
+     * I use the if statement here to check if the next word that is going to printed is going to be out range. If it is
+     * going to be out of range, I move the y coordinate of the printed word down to the row. I have this if statement
+     * in the  for loop because I need to check this for every word (the user could enter a few really long words and
+     * need to move onto the next line a couple of times).
+     *
+     * I technically have a while loop in my code, but it’s in the loadDictionary() method, which I got from spellingBee.
+     * A while loop can be used to run a function/method/etc that has an unknown amount of times it will change
+     * (it could also be used when there is a known amount of times something will run). For example, a person would use
+     * a while loop to continuously perform an action until the game is won.
+     *
+     * I also used many for loops in throughout my program, but a specific example of it is in the printFoundWords()
+     * method. I want to print every word in the foundWords ArrayList, so I used a for loop that went until i < then
+     * the size of foundWords. I also do a check every time in this for loop to see if the words would be printed off
+     * the page.
+     */
     // A helper function to print out all the words in the foundWords ArrayList
     private void printFoundWords(Graphics g) {
         int size = letterManager.getFoundWords().size();
